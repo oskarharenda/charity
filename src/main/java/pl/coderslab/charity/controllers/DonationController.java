@@ -3,15 +3,13 @@ package pl.coderslab.charity.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.dto.DonationDto;
 import pl.coderslab.charity.services.CategoryService;
 import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
@@ -38,12 +36,12 @@ public class DonationController {
     }
 
     @PostMapping
-    public String processAddDonation(@Valid @ModelAttribute("donation") DonationDto donationDto, BindingResult result){
+    @ResponseBody
+    public String processAddDonation(@Valid @ModelAttribute("donation") DonationDto donationDto, HttpServletRequest request, BindingResult result){
         if(result.hasErrors()){
             return "test";
         }
-        donationService.saveDonation(donationDto);
-        return "formConfirmation";
-
+        //donationService.saveDonation(donationDto);
+        return donationDto.toString();
     }
 }

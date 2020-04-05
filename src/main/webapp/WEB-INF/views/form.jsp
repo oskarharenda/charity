@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: oskar
@@ -80,68 +81,32 @@
             <p data-step="4">Podaj adres oraz termin odbioru rzeczy.</p>
         </div>
     </div>
-
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form action="${pageContext.request.contextPath}/donation" method="post">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
-
+                <c:forEach items="${categories}" var="category">
                 <div class="form-group form-group--checkbox">
                     <label>
                         <input
                                 type="checkbox"
                                 name="categories"
-                                value="clothes-to-use"
+                                value=${category.name}
                         />
                         <span class="checkbox"></span>
                         <span class="description"
-                        >ubrania, które nadają się do ponownego użycia</span
+                        >${category.name}</span
                         >
                     </label>
                 </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input
-                                type="checkbox"
-                                name="categories"
-                                value="clothes-useless"
-                        />
-                        <span class="checkbox"></span>
-                        <span class="description">ubrania, do wyrzucenia</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="toys" />
-                        <span class="checkbox"></span>
-                        <span class="description">zabawki</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="books" />
-                        <span class="checkbox"></span>
-                        <span class="description">książki</span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="checkbox" name="categories" value="other" />
-                        <span class="checkbox"></span>
-                        <span class="description">inne</span>
-                    </label>
-                </div>
-
+                </c:forEach>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
+
             </div>
 
             <!-- STEP 2 -->
@@ -166,34 +131,20 @@
             <!-- STEP 4 -->
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
-
+                <c:forEach var="fundation" items="${institutions}">
                 <div class="form-group form-group--checkbox">
                     <label>
                         <input type="radio" name="organization" value="old" />
                         <span class="checkbox radio"></span>
                         <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
+                  <div class="title">Fundacja “${fundation.name}”</div>
                   <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
+                    ${fundation.description}
                   </div>
                 </span>
                     </label>
                 </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old" />
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-                    </label>
-                </div>
+                </c:forEach>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -308,42 +259,7 @@
     </div>
 </section>
 
-<footer>
-    <div class="contact">
-        <h2>Skontaktuj się z nami</h2>
-        <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-            <div class="form-group form-group--50">
-                <input type="text" name="name" placeholder="Imię" />
-            </div>
-            <div class="form-group form-group--50">
-                <input type="text" name="surname" placeholder="Nazwisko" />
-            </div>
-
-            <div class="form-group">
-            <textarea
-                    name="message"
-                    placeholder="Wiadomość"
-                    rows="1"
-            ></textarea>
-            </div>
-
-            <button class="btn" type="submit">Wyślij</button>
-        </form>
-    </div>
-    <div class="bottom-line">
-        <span class="bottom-line--copy">Copyright &copy; 2018</span>
-        <div class="bottom-line--icons">
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-facebook.svg"
-            /></a>
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-instagram.svg"
-            /></a>
-        </div>
-    </div>
-</footer>
-
-<script src="js/app.js"></script>
+<jsp:include page="resources/footer.jsp"></jsp:include>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
