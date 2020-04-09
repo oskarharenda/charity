@@ -11,27 +11,25 @@ import pl.coderslab.charity.services.InstitutionService;
 
 import javax.validation.Valid;
 
-
 @Controller
-@RequestMapping("donation")
-public class DonationController {
-    final private InstitutionService institutionService;
-    final private CategoryService categoryService;
-    final private DonationService donationService;
+@RequestMapping("/test")
+public class TestController {
+    private final InstitutionService institutionService;
+    private final CategoryService categoryService;
+    private final DonationService donationService;
 
-    public DonationController(InstitutionService institutionService, DonationService donationService, CategoryService categoryService, DonationService donationService1) {
+    public TestController(InstitutionService institutionService, CategoryService categoryService, DonationService donationService) {
         this.institutionService = institutionService;
         this.categoryService = categoryService;
-        this.donationService = donationService1;
+        this.donationService = donationService;
     }
-
 
     @GetMapping
     public String addDonation(Model model){
         model.addAttribute("institutions",institutionService.allInstitution());
         model.addAttribute("categories",categoryService.allCategory());
         model.addAttribute("donation", new DonationDto());
-        return "form";
+        return "test";
     }
 
     @PostMapping

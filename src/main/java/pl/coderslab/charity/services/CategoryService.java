@@ -25,10 +25,10 @@ public class CategoryService {
         }
         return categories;
     }
-
-    private CategoryDto toDto(Category category) {
+    public CategoryDto toDto(Category category) {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setName(category.getName());
+        categoryDto.setId(category.getId());
         return categoryDto;
     }
 }

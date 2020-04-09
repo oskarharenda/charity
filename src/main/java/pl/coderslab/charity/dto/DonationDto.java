@@ -5,6 +5,7 @@ import pl.coderslab.charity.model.Institution;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class DonationDto {
@@ -16,6 +17,6 @@ public class DonationDto {
     private LocalDate pickUpDate;
     private LocalTime pickUpTime;
     private String pickUpComment;
-    private Category category;
-    private Institution institution;
+    private List<Long> categoryId;
+    private Long institutionId;
 }

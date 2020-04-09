@@ -18,4 +18,7 @@ public class Institution {
 
     @OneToOne(mappedBy = "institution")
     private Donation donation;
+
+    @ManyToOne
+    User user;
 }

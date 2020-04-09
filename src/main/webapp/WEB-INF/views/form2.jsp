@@ -1,44 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: oskar
-  Date: 08.04.2020
-  Time: 09:14
-  To change this template use File | Settings | File Templates.
-
---%>
-<html lang="pl">
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="resources/css/style.css" />
+    <title>form</title>
 </head>
 <body>
 <header class="header--form-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Witaj Agata
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <ul>
-            <li><a href="" class="btn btn--without-border active">Start</a></li>
-            <li><a href="${pageContext.request.contextPath}/#steps" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="${pageContext.request.contextPath}/#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="${pageContext.request.contextPath}/#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
-    </nav>
+    <jsp:include page="resources/header.jsp"></jsp:include>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -87,33 +56,33 @@
             <p data-step="4">Podaj adres oraz termin odbioru rzeczy.</p>
         </div>
     </div>
-
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form modelAttribute="donation" method="post">
+    <form:form modelAttribute="donation" method="post">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
-
                 <c:forEach items="${categories}" var="category">
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    name="categories"
-                                    value=${category.id}
-                            />
-                            <span class="checkbox"></span>
-                            <span class="description"
-                            >${category.name}</span
-                            >
-                        </label>
-                    </div>
+                <div class="form-group form-group--checkbox">
+                    <label>
+                        <input
+                                type="checkbox"
+                                name="categories"
+                                value=${category.id}
+                        />
+                        <span class="checkbox"></span>
+                        <span class="description"
+                        >${category.name}</span
+                        >
+                    </label>
+                </div>
                 </c:forEach>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
+
+            </div>
 
             <!-- STEP 2 -->
             <div data-step="2">
@@ -138,20 +107,19 @@
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
                 <c:forEach var="fundation" items="${institutions}">
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input type="radio" name="organization" value="${fundation.id}" />
-                            <span class="checkbox radio"></span>
-                            <span class="description">
+                <div class="form-group form-group--checkbox">
+                    <label>
+                        <input type="radio" name="organization" value="${fundation.id}" />
+                        <span class="checkbox radio"></span>
+                        <span class="description">
                   <div class="title">Fundacja “${fundation.name}”</div>
                   <div class="subtitle">
-                          ${fundation.description}
+                    ${fundation.description}
                   </div>
                 </span>
-                        </label>
-                    </div>
+                    </label>
+                </div>
                 </c:forEach>
-
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -180,15 +148,15 @@
                             </label>
                         </div>
 
-                        <div class="form-group form-group--inline">
-                            <label>
-                                Numer telefonu <input type="phone" name="phone" />
-                            </label>
-                        </div>
+<%--                        <div class="form-group form-group--inline">--%>
+<%--                            <label>--%>
+<%--                                Numer telefonu <form:input type="phone" name="phone"  path=""/>--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
                     </div>
 
-                    <div class="form-section--column">
-                        <h4>Termin odbioru</h4>
+<%--                    <div class="form-section--column">--%>
+<%--                        <h4>Termin odbioru</h4>--%>
 <%--                        <div class="form-group form-group--inline">--%>
 <%--                            <label> Data <form:input type="date" name="data"  path="pickUpDate"/> </label>--%>
 <%--                        </div>--%>
@@ -197,13 +165,13 @@
 <%--                            <label> Godzina <form:input type="time" name="time"  path="pickUpTime"/> </label>--%>
 <%--                        </div>--%>
 
-                        <div class="form-group form-group--inline">
-                            <label>
-                                Uwagi dla kuriera
-                                <form:input type="textarea" name="more_info" rows="5"  path="pickUpComment"/>
-                            </label>
-                        </div>
-                    </div>
+<%--                        <div class="form-group form-group--inline">--%>
+<%--                            <label>--%>
+<%--                                Uwagi dla kuriera--%>
+<%--                                <textarea name="more_info" rows="5"></textarea>--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -262,46 +230,11 @@
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>
             </div>
-                </form:form>
+    </form:form>
     </div>
 </section>
 
-<footer>
-    <div class="contact">
-        <h2>Skontaktuj się z nami</h2>
-        <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
-            <div class="form-group form-group--50">
-                <input type="text" name="name" placeholder="Imię" />
-            </div>
-            <div class="form-group form-group--50">
-                <input type="text" name="surname" placeholder="Nazwisko" />
-            </div>
-
-            <div class="form-group">
-            <textarea
-                    name="message"
-                    placeholder="Wiadomość"
-                    rows="1"
-            ></textarea>
-            </div>
-
-            <button class="btn" type="submit">Wyślij</button>
-        </form>
-    </div>
-    <div class="bottom-line">
-        <span class="bottom-line--copy">Copyright &copy; 2018</span>
-        <div class="bottom-line--icons">
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-facebook.svg"
-            /></a>
-            <a href="#" class="btn btn--small"
-            ><img src="images/icon-instagram.svg"
-            /></a>
-        </div>
-    </div>
-</footer>
-
-<script src="resources/js/app.js"></script>
+<jsp:include page="resources/footer.jsp"></jsp:include>
+<script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
