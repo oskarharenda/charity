@@ -21,6 +21,7 @@ public class InstitutionService {
         List<InstitutionDto> institutionDto = new ArrayList<>();
         for(Institution institution : all){
             InstitutionDto instDto = new InstitutionDto();
+            instDto.setId(institution.getId());
             instDto.setName(institution.getName());
             instDto.setDescription(institution.getDescription());
             institutionDto.add(instDto);

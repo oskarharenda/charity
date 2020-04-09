@@ -16,7 +16,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "category")
+    @ManyToMany
     private List<Donation> donations = new ArrayList<>();
 
     String name;

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,8 +18,8 @@ public class Institution {
     private String name;
     private String description;
 
-    @OneToOne(mappedBy = "institution")
-    private Donation donation;
+    @OneToMany(mappedBy = "institution")
+    private List<Donation> donations = new ArrayList<>();
 
     @ManyToOne
     User user;

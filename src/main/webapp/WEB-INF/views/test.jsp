@@ -8,9 +8,17 @@
 </head>
 <body>
 <form:form modelAttribute="donation" method="post">
-<form:checkboxes path="category"
-                 items="${categories}"/>
-<form:select path="institution" items="${institutions}"/>
+    <c:forEach items="${categories}" var="category">
+                <form:checkbox path="categoryId" value="${category.id}"/>
+                ${category.name}
+    </c:forEach>
+
+    <c:forEach var="institution" items="${institutions}">
+
+        <form:radiobutton path="institutionId" value="${institution.id}"/>
+        istytucja: ${institution.name}
+        Cel i misja: ${institution.description}
+    </c:forEach>
 zip code<form:input path="zipCode" />
 ulica<form:input path="street" />
 miasto<form:input path="city"/>
