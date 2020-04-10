@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import pl.coderslab.charity.services.SpringDataUserDetailsService;
+
 import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,6 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .and()
                 .csrf();
+    }
+    @Bean
+    public SpringDataUserDetailsService customUserDetailsService() {
+        return new SpringDataUserDetailsService();
     }
 
 }

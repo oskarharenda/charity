@@ -35,12 +35,11 @@ public class DonationController {
     }
 
     @PostMapping
-    @ResponseBody
     public String processAddDonation(@Valid @ModelAttribute("donation") DonationDto donationDto, BindingResult result){
         if(result.hasErrors()){
             return "hasErrors:"+result.toString();
         }
         donationService.saveDonation(donationDto);
-        return "donationDto: "+donationDto.toString();
+        return "formConfirmation";
     }
 }
